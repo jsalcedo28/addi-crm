@@ -1,9 +1,8 @@
-import logo from "./logo.svg";
 import TopBar from "./components/layout/TopBar";
 import SideBar from "./components/layout/SideBar";
-import MetricsRow from "./components/common/MetricsRow";
 import Footer from "./components/footer/Footer";
-import CurrentOpportunities from "./components/opportunities/CurrentOpportunities";
+import { Routes, Route } from "react-router";
+import { Home, Opportunities, PageNotFound } from "./routes/pages";
 import "./App.css";
 
 function App() {
@@ -14,8 +13,11 @@ function App() {
         <div className="main_container">
           <SideBar />
           <div className="container">
-            <MetricsRow />
-            <CurrentOpportunities />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/opportunities" element={<Opportunities />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
           </div>
         </div>
       </div>

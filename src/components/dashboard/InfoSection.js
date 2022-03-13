@@ -7,7 +7,7 @@ const InfoSection = (props) => {
       <p>{props.description}</p>
       <div class="action">
         <a
-          href="https://github.com/jsalcedo28"
+          href="https://github.com/jsalcedo28/addi-crm"
           title="View, Fork or Star on GitHub"
           rel="noreferrer"
           class="btn github"

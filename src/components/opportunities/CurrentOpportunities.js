@@ -1,4 +1,5 @@
 import React from "react";
+import MetricsRow from "../common/MetricsRow";
 import ProfileCardRow from "./ProfileCardsRow";
 
 const contacts = [
@@ -98,11 +99,14 @@ const contactObjects = contacts.map((contact, i) => ({
 
 const CurrentOpportunities = () => {
   return (
-    <div className="item">
-      <h1>Current Opportunities</h1>
-      <hr />
-      <ProfileCardRow contacts={contactObjects} />
-    </div>
+    <>
+      <MetricsRow />
+      <div className="item">
+        <h1>Current Opportunities</h1>
+        <hr />
+        <ProfileCardRow contacts={contactObjects} />
+      </div>
+    </>
   );
 };
 

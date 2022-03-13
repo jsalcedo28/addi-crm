@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
   return (
@@ -19,20 +20,20 @@ const SideBar = () => {
         </div>
         <ul>
           <li>
-            <a href="index.html">
+            <NavLink exact activeClassName="active" to="/">
               <span className="icon">
                 <i className="fas fa-dice-d6"></i>
               </span>
               <span className="title">Dashboard</span>
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="contacts.html" className="active">
+            <NavLink activeClassName="active" to="/opportunities">
               <span className="icon">
                 <i className="fas fa-users"></i>
               </span>
               <span className="title">Opportunities</span>
-            </a>
+            </NavLink>
           </li>
         </ul>
       </div>

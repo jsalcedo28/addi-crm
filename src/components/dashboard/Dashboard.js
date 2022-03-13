@@ -1,6 +1,6 @@
 import React from "react";
-import MetricsRow from "../MetricsRow";
-import InfoSection from "../InfoSection";
+import MetricsRow from "../common/MetricsRow";
+import InfoSection from "./InfoSection";
 
 const title = "Technical Challenge: Addi CRM";
 const description =
