@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MetricsRow from "../common/MetricsRow";
 import ProfileCardRow from "./ProfileCardsRow";
+import { createServer } from "miragejs";
 
 const contacts = [
   {
@@ -85,26 +86,27 @@ const contacts = [
   },
 ];
 
-const contactObjects = contacts.map((contact, i) => ({
-  id: i,
-  firstName: contact.firstName,
-  lastName: contact.lastName,
-  nationalID: contact.nationalID,
-  birthdate: contact.birthdate,
-  email: contact.email,
-  type: contact.type,
-  imgUrl: contact.imgUrl,
-  score: contact.score,
-}));
+let server = createServer();
+server.get("/api/users", { users: contacts });
 
 const CurrentOpportunities = () => {
+  let [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/users")
+      .then((res) => res.json())
+      .then((json) => {
+        setUsers(json.users);
+      });
+  }, []);
+
   return (
     <>
       <MetricsRow />
       <div className="item">
         <h1>Current Opportunities</h1>
         <hr />
-        <ProfileCardRow contacts={contactObjects} />
+        <ProfileCardRow contacts={users} />
       </div>
     </>
   );
