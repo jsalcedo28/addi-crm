@@ -20,7 +20,7 @@ const SideBar = () => {
         </div>
         <ul>
           <li>
-            <NavLink exact activeClassName="active" to="/">
+            <NavLink exact="true" activeclassname="selected" to="/">
               <span className="icon">
                 <i className="fas fa-dice-d6"></i>
               </span>
@@ -28,7 +28,7 @@ const SideBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="active" to="/opportunities">
+            <NavLink activeclassname="selected" to="/opportunities">
               <span className="icon">
                 <i className="fas fa-users"></i>
               </span>

@@ -2,15 +2,15 @@ import React from "react";
 
 const InfoSection = (props) => {
   return (
-    <div class="intro">
+    <div className="intro">
       <h1>{props.title}</h1>
       <p>{props.description}</p>
-      <div class="action">
+      <div className="action">
         <a
           href="https://github.com/jsalcedo28/addi-crm"
           title="View, Fork or Star on GitHub"
           rel="noreferrer"
-          class="btn github"
+          className="btn github"
           target="_blank"
         >
           View on GitHub

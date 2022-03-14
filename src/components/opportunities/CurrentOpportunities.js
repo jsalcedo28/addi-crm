@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MetricsRow from "../common/MetricsRow";
 import ProfileCardRow from "./ProfileCardsRow";
+import Loader from "../common/Loader";
 import { createServer } from "miragejs";
 
 const contacts = [
@@ -106,6 +107,7 @@ const CurrentOpportunities = () => {
       <div className="item">
         <h1>Current Opportunities</h1>
         <hr />
+        <Loader />
         <ProfileCardRow contacts={users} />
       </div>
     </>
