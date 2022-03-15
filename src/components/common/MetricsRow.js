@@ -1,31 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MetricCard from "./MetricCard";
 
-const metrics = [
-  {
-    title: "Contacts",
-    count: 12,
-  },
-  {
-    title: "Leads",
-    count: 10,
-  },
-  {
-    title: "Prospects",
-    count: 2,
-  },
-];
-
-const metricObjects = metrics.map((metric, i) => ({
-  id: i,
-  title: metric.title,
-  count: metric.count,
-}));
-
 const MetricsRow = () => {
+  let [metrics, setMetrics] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/metrics")
+      .then((res) => res.json())
+      .then((json) => {
+        setMetrics(json.metrics);
+      });
+  }, []);
+
   return (
-    <div className="grid-container-3">
-      <MetricCard metrics={metricObjects} />
+    <div className="grid-container-3 animate-bottom">
+      <MetricCard metrics={metrics} />
     </div>
   );
 };
