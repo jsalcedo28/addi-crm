@@ -4,7 +4,7 @@ A custom-made CRM that our sales agents use on a daily basis. That system is bas
 
 ## Project Demo
 
-🚀[View Demo](https://la-haus-real-estates-challenge.netlify.app)
+🚀[View Demo](https://add-crm-jsalcedo.netlify.app/)
 
 ## Build Setup
 
@@ -25,4 +25,18 @@ $ npm run generate
 
 ## Decisions
 
+I have made most of my decisions following based the steps below:
+
+- Step 1: Break The UI Into A Component Hierarchy.
+- Step 2: Build A Static Version in React
+- Step 3: Identify The Minimal (but complete) Representation Of UI State
+- Step 4: Identify Where My State Should Live
+- Step 5: Add Inverse Data Flow
+
+I also did use miragejs to mockup my api data and HTTP request calls.
+
 ## Improvements
+
+There are some run for improvements for the CRM, among which it is worth mentioning the addition of filters to more easily and quickly search for contacts within the opportunities page.
+
+Improvement decisions at the code level could be the implementation of styled-components, typescript for managing objects in the application, and teh implementation of ContextAPI for managing states globally.
