@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Loader from "../common/Loader";
+import axios from "axios";
 
 const ProfileCard = ({ contact }) => {
   let [type, setType] = useState(contact.type);
-  let [score, setScore] = useState(0);
+  let [score, setScore] = useState(contact.score);
   let [isValidated, setIsValidated] = useState(false);
   let [isLoadingValidate, setIsLoadingValidate] = useState(false);
   let [isLoadingConvert, setIsLoadingConvert] = useState(false);
@@ -11,67 +12,74 @@ const ProfileCard = ({ contact }) => {
   let [hasCleanRecord, setHasCleanRecord] = useState(false);
   let [hasGoodScore, setHasGoodScore] = useState(false);
 
-  // useEffect(() => {
-  //   fetch(`/api/judicial/${contact.nationalID}`)
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       console.log(json.judicialRecords);
-  //     });
-  // }, []);
+  const getScore = (nationalID) => {
+    axios
+      .get(`/api/score/${nationalID}`)
+      .then(function (response) {
+        // handle success
+        const newScore = response.data;
+        setScore(newScore);
 
-  const getScore = () => {
-    console.log("getscore1");
-    try {
-      console.log("getscore");
-      fetch("/api/score")
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json.score);
-          return json.score;
-        });
-    } catch (error) {
-      console.log(error);
-    }
+        if (newScore > 60) {
+          setType("Prospect");
+          setHasGoodScore(true);
+        }
+        setIsLoadingConvert(false);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   };
 
   const validate = async (nationalID) => {
     setIsLoadingValidate(true);
-    setTimeout(() => {
-      setIsValidated(true);
-      setIsLoadingValidate(false);
-      setIsOnNationalRegistry(true);
-      setHasCleanRecord(true);
-    }, 2000);
+
+    //simultaneous requests with Axios
+    axios
+      .all([
+        axios.get(`/api/registry/${nationalID}`),
+        axios.get(`/api/judicial/${nationalID}`),
+      ])
+      .then(
+        axios.spread((nationalData, judicialData) => {
+          // output of req.
+          const nationalRecord = nationalData.data.nationalRecords[0];
+          const judicialRecord = judicialData.data.judicialRecords[0];
+
+          //validating that exist and match the national registry
+          if (
+            nationalRecord.isMatchInRegistry &&
+            nationalRecord.isOnNationalRegistry
+          ) {
+            setIsOnNationalRegistry(true);
+          }
+
+          //validating that has a clean record
+          if (!judicialRecord.hasRecords) {
+            setHasCleanRecord(true);
+          }
+
+          //Set isValidated if user exist in national registry and has no criminal records
+          if (
+            nationalRecord.isMatchInRegistry &&
+            nationalRecord.isOnNationalRegistry &&
+            !judicialRecord.hasRecords
+          ) {
+            setIsValidated(true);
+          }
+
+          setIsLoadingValidate(false);
+        })
+      );
   };
 
   const convert = (nationalID) => {
     setIsLoadingConvert(true);
-    setTimeout(() => {
-      console.log(nationalID);
-      console.log(type);
-      console.log(score);
 
-      const userScore = getScore();
-      setScore(userScore);
-
-      console.log("score", score);
-
-      setType("Prospect");
-      setHasGoodScore(true);
-
-      setIsLoadingConvert(false);
-    }, 2000);
+    //getting satisfaction score
+    getScore(nationalID);
   };
-
-  // const convertContact = (id) => {
-  //   fetch(`/api/notes/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setNote(data.notes);
-  //       setToggle(true);
-  //     })
-  //     .catch((error) => console.log('Note not found', error));
-  // };
 
   return (
     <div className="column">
@@ -95,17 +103,21 @@ const ProfileCard = ({ contact }) => {
         </p>
         <div className="tags-section">
           <span className="label other">{score} Score</span>
-          {type === "Lead" ? (
-            <span className="label info">{type}</span>
-          ) : (
-            <span className="label success">{type}</span>
-          )}
+          <span
+            className={
+              type === "Lead" && score < 60 ? "label info" : "label success"
+            }
+          >
+            {type}
+          </span>
         </div>
         <div className="validation-section">
           <p>
             <i
               className={
                 isOnNationalRegistry
+                  ? "fa fa-check-circle-o green-color"
+                  : type === "Prospect"
                   ? "fa fa-check-circle-o green-color"
                   : "fa fa-close red-color"
               }
@@ -117,6 +129,8 @@ const ProfileCard = ({ contact }) => {
               className={
                 hasCleanRecord
                   ? "fa fa-check-circle-o green-color"
+                  : type === "Prospect"
+                  ? "fa fa-check-circle-o green-color"
                   : "fa fa-close red-color"
               }
             ></i>{" "}
@@ -126,6 +140,8 @@ const ProfileCard = ({ contact }) => {
             <i
               className={
                 hasGoodScore
+                  ? "fa fa-check-circle-o green-color"
+                  : type === "Prospect"
                   ? "fa fa-check-circle-o green-color"
                   : "fa fa-close red-color"
               }

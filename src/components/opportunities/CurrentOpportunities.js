@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import MetricsRow from "../common/MetricsRow";
 import ProfileCardRow from "./ProfileCardsRow";
+import axios from "axios";
 
 const CurrentOpportunities = () => {
   let [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetch("/api/contacts")
-      .then((res) => res.json())
-      .then((json) => {
-        setContacts(json.contacts);
+    axios
+      .get("/api/contacts")
+      .then(function (response) {
+        // handle success
+        setContacts(response.data.contacts);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
       });
   }, []);
 

@@ -8,6 +8,8 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=16",
     score: 15,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
   {
     firstName: "Maria",
@@ -18,6 +20,8 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=22",
     score: 10,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
   {
     firstName: "Marcus",
@@ -28,6 +32,8 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=14",
     score: 26,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
   {
     firstName: "Mara",
@@ -38,6 +44,8 @@ export const contacts = [
     type: "Prospect",
     imgUrl: "https://i.pravatar.cc/250?img=9",
     score: 85,
+    isOnNationalRegistry: true,
+    hasCleanRecord: true,
   },
   {
     firstName: "James",
@@ -48,6 +56,8 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=12",
     score: 15,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
   {
     firstName: "John",
@@ -58,6 +68,8 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=8",
     score: 11,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
   {
     firstName: "Mike",
@@ -68,6 +80,8 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=11",
     score: 10,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
   {
     firstName: "John",
@@ -78,6 +92,8 @@ export const contacts = [
     type: "Prospect",
     imgUrl: "https://i.pravatar.cc/250?img=7",
     score: 90,
+    isOnNationalRegistry: true,
+    hasCleanRecord: true,
   },
   {
     firstName: "Serena",
@@ -88,6 +104,8 @@ export const contacts = [
     type: "Prospect",
     imgUrl: "https://i.pravatar.cc/250?img=30",
     score: 85,
+    isOnNationalRegistry: true,
+    hasCleanRecord: true,
   },
   {
     firstName: "Fernando",
@@ -98,6 +116,8 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=13",
     score: 11,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
   {
     firstName: "Yami",
@@ -108,6 +128,8 @@ export const contacts = [
     type: "Prospect",
     imgUrl: "https://i.pravatar.cc/250?img=33",
     score: 80,
+    isOnNationalRegistry: true,
+    hasCleanRecord: true,
   },
   {
     firstName: "Guillermo",
@@ -118,5 +140,7 @@ export const contacts = [
     type: "Lead",
     imgUrl: "https://i.pravatar.cc/250?img=15",
     score: 20,
+    isOnNationalRegistry: false,
+    hasCleanRecord: false,
   },
 ];

@@ -9,13 +9,13 @@ export const judicialRecords = [
     firstName: "Maria",
     lastName: "Perez",
     nationalID: "9459008921",
-    hasRecords: false,
+    hasRecords: true,
   },
   {
     firstName: "Marcus",
     lastName: "Camby",
     nationalID: "3245643593",
-    hasRecords: true,
+    hasRecords: false,
   },
   {
     firstName: "Mara",
@@ -33,7 +33,7 @@ export const judicialRecords = [
     firstName: "John",
     lastName: "Doe",
     nationalID: "7732369227",
-    hasRecords: false,
+    hasRecords: true,
   },
   {
     firstName: "Mike",

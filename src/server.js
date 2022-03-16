@@ -1,4 +1,4 @@
-import { createServer, Model, Server, Response } from "miragejs";
+import { createServer, Model, Response } from "miragejs";
 
 import { contacts } from "./mockup/contact";
 import { metrics } from "./mockup/metrics";
@@ -42,51 +42,67 @@ export function makeServer({ environment = "development" } = {}) {
         return schema.contacts.all();
       });
 
-      this.get("/registry/:nationalID", (schema, request) => {
-        let record = schema.nationalRecords.where({
-          nationalID: request.params.nationalID,
-        });
+      this.get(
+        "/registry/:nationalID",
+        (schema, request) => {
+          let record = schema.nationalRecords.where({
+            nationalID: request.params.nationalID,
+          });
 
-        if (record.length) return record;
+          if (record.length) return record;
 
-        return new Response(
-          404,
-          {},
-          {
-            status: 404,
-            error: "This Person doesn't exist in the National Registry",
-          }
-        );
-      });
+          return new Response(
+            404,
+            {},
+            {
+              status: 404,
+              error: "This Person doesn't exist in the National Registry",
+            }
+          );
+        },
+        { timing: 1000 }
+      );
 
-      this.get("/judicial/:nationalID", (schema, request) => {
-        let record = schema.judicialRecords.where({
-          nationalID: request.params.nationalID,
-        });
+      this.get(
+        "/judicial/:nationalID",
+        (schema, request) => {
+          let record = schema.judicialRecords.where({
+            nationalID: request.params.nationalID,
+          });
 
-        if (record.length) return record;
+          if (record.length) return record;
 
-        return new Response(
-          404,
-          {},
-          {
-            status: 404,
-            error: "This Person doesn't exist in the National Archives",
-          }
-        );
-      });
+          return new Response(
+            404,
+            {},
+            {
+              status: 404,
+              error: "This Person doesn't exist in the National Archives",
+            }
+          );
+        },
+        { timing: 1000 }
+      );
 
-      this.get("/score", (schema) => {
-        let score = Math.floor(Math.random() * 101);
-        return score;
-      });
+      this.get(
+        "/score/:nationalID",
+        (schema, request) => {
+          let score = Math.floor(Math.random() * 100) + 1;
 
-      this.patch("/contacts/:id", (schema, request) => {
-        let newAttrs = JSON.parse(request.requestBody);
-        let nationalID = request.params.nationalID;
-        let contact = schema.contacts.find(nationalID);
-        return contact.update(newAttrs);
-      });
+          let judicialRecord = schema.judicialRecords.where({
+            nationalID: request.params.nationalID,
+          });
+
+          let nationalRecord = schema.judicialRecords.where({
+            nationalID: request.params.nationalID,
+          });
+
+          //validate that the person exist in the national registry in order to return a score
+          if (judicialRecord.length && nationalRecord.length) return score;
+          else return 0;
+        },
+        { timing: 2000 }
+      );
     },
   });
 
