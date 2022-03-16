@@ -1,9 +1,9 @@
 import React from "react";
 
-const MetricCard = (props) => {
+const MetricCard = ({ metrics }) => {
   return (
     <>
-      {props.metrics.map((metric, i) => (
+      {metrics.map((metric, i) => (
         <div key={i}>
           <h1>{metric.count}</h1>
           <span>{metric.title}</span>

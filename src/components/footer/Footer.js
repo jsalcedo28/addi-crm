@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="credit">
+    <footer className="credit ">
       <span>
         Author:
         <a

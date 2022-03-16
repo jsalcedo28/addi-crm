@@ -132,11 +132,11 @@ button {
   background-color: #4e7eff;
   text-align: center;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
   font-size: 18px;
 }
 
-.social-icons {
+.action .social-icons {
   text-decoration: none;
   font-size: 22px;
   color: black;
@@ -311,6 +311,14 @@ button {
   background: #a2b9f7;
 }
 
+.disabled-btn {
+  background: #a2b9f7 !important;
+}
+
+.validate-btn {
+  background: #00326d !important;
+}
+
 .top_navbar .menu .right_menu ul li .profile_dd:before {
   content: "";
   position: absolute;
@@ -416,17 +424,13 @@ button {
 }
 
 .loader {
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #4e7eff; /* Blue */
+  border: 3px solid #f3f3f3; /* Light grey */
+  border-top: 3px solid #4e7eff; /* Blue */
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   animation: spin 2s linear infinite;
-  /* margin: auto; */
-}
-
-.loader-container {
-  margin: 200px;
+  margin: auto;
 }
 
 @keyframes spin {
@@ -466,4 +470,16 @@ button {
     bottom: 0;
     opacity: 1;
   }
+}
+
+.red-color {
+  color: #e41b17;
+}
+
+.green-color {
+  color: #04aa6d;
+}
+
+.validation-section {
+  margin-bottom: 10px;
 }
