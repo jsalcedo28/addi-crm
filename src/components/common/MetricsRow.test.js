@@ -1,4 +1,5 @@
 import MetricsRow from "./MetricsRow";
+import { metrics } from "../../mockup/metrics";
 import { configure, shallow, mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { makeServer } from "../../server";
@@ -15,21 +16,6 @@ afterEach(() => {
   server.shutdown();
 });
 
-const metrics = [
-  {
-    title: "Contacts",
-    count: 12,
-  },
-  {
-    title: "Leads",
-    count: 8,
-  },
-  {
-    title: "Prospects",
-    count: 4,
-  },
-];
-
 it("renders without crashing", () => {
   shallow(<MetricsRow metrics={metrics} />);
 });
@@ -39,8 +25,8 @@ it("accepts metrics props", () => {
   expect(wrapper.props().metrics).toEqual(metrics);
 });
 
-it("shows the contacts from the server", async () => {
-  metrics.forEach((metric) => server.create("contact", metric));
+it("shows the metrics from the server", async () => {
+  metrics.forEach((metric) => server.create("metric", metric));
 
   const wrapper = mount(<MetricsRow metrics={metrics} />);
   expect(wrapper.props().metrics).toEqual(metrics);
